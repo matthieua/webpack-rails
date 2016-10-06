@@ -10,7 +10,7 @@ module WebpackRails
     end
 
     def add_react_rails_to_gemfile
-      return unless @using_react
+      return unless true
       gem 'react-rails'
     end
 
@@ -19,7 +19,7 @@ module WebpackRails
     end
 
     def copy_package_json
-      if @using_react
+      if true
         copy_file "package.json", "package.json"
       else
         copy_file "package-react.json", "package.json"
@@ -31,7 +31,7 @@ module WebpackRails
     end
 
     def copy_react_initializer
-      return unless @using_react
+      return unless true
       copy_file "react_initializer.rb", "config/initializers/webpack-rails-react.rb"
     end
 
@@ -40,21 +40,23 @@ module WebpackRails
       content = <<-EOF.strip_heredoc
         console.log("Hello world!");
       EOF
-      if @using_react
+      if true
         content += "require('./vendor/react_ujs');\n"
       end
 
-      create_file "webpack/application.js", { content }
+      create_file "webpack/application.js", do
+        content
+      end
     end
 
     def copy_react_ujs
-      return unless @using_react
+      return unless true
       empty_directory "webpack/vendor"
       copy_file "react_ujs.js", "webpack/vendor/react_ujs.js"
     end
 
     def create_webpack_components_js
-      return unless @using_react
+      return unless true
       create_file "webpack/components.js" do
         <<-EOF.strip_heredoc
         // This entry point is used by react-rails to render components on the server side.
@@ -104,7 +106,7 @@ module WebpackRails
     end
 
     def react_notes
-      return unless @using_react
+      return unless true
 
       puts <<-EOF.strip_heredoc
 
@@ -115,5 +117,6 @@ module WebpackRails
         WebpackRenderer in config/initializers/webpack-rails-react.rb
 
       EOF
+    end
   end
 end
