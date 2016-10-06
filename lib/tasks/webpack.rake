@@ -1,7 +1,8 @@
 namespace :webpack do
   desc "Compile webpack bundles"
   task compile: :environment do
-    ENV["TARGET"] = 'production'
+    ENV["TARGET"] = 'production' # TODO: Deprecated, use NODE_ENV instead
+    ENV["NODE_ENV"] = 'production'
     webpack_bin = ::Rails.root.join(::Rails.configuration.webpack.binary)
     config_file = ::Rails.root.join(::Rails.configuration.webpack.config_file)
 
@@ -13,7 +14,6 @@ namespace :webpack do
       raise "Can't find our webpack config file at #{config_file}"
     end
 
-    result = `#{webpack_bin} --bail --config #{config_file} 2>&1`
-    raise result unless $CHILD_STATUS == 0
+    sh "#{webpack_bin} --config #{config_file} --bail"
   end
 end
