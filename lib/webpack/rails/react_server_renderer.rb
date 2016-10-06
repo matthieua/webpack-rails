@@ -83,7 +83,7 @@ module Webpack
 
       def webpack_asset_local path
         File.read(
-          Rails.root.join(
+          ::Rails.root.join(
             ::Rails.configuration.webpack.output_dir,
             path
           )
