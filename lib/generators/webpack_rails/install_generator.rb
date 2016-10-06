@@ -44,7 +44,7 @@ module WebpackRails
         content += "require('./vendor/react_ujs');\n"
       end
 
-      create_file "webpack/application.js", do
+      create_file "webpack/application.js" do
         content
       end
     end
