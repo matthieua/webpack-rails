@@ -89,10 +89,6 @@ module Webpack
             path
           )
         )
-      rescue => e
-        puts '>>>>>>'
-        puts path
-        raise
       end
     end
   end
